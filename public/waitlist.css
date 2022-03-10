@@ -1,0 +1,15 @@
+.logoHeader {
+    animation: 2s slideIn ease-in-out;
+    animation-fill-mode: forwards;
+    left: -300px
+}
+
+@keyframes slideIn {
+    0%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}

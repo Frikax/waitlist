@@ -1,0 +1,297 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700");
+* {
+  -webkit-appearance: none;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+.logoHeader {
+  animation: 300ms slideIn ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 2700ms;
+  transform: translateX(-200px);
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+.formHead {
+  animation: 300ms slideIn2 ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 2300ms;
+  opacity: 0;
+}
+
+@keyframes slideIn2 {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.imgHead {
+  animation: 300ms slideIn3 ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3000ms;
+  opacity: 0;
+}
+
+@keyframes slideIn3 {
+  0% {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.formDiv {
+  animation: 300ms formDiv ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3700ms;
+  transform: translateY(200px);
+  opacity: 0;
+}
+
+@keyframes formDiv {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+  100% {
+    opacity: 1;
+    z-index: 0;
+    transform: translateY(0px);
+  }
+}
+
+.welcome {
+  animation: 200ms slideIn4 ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 4000ms;
+  transform: translateY(-25px);
+  opacity: 0;
+}
+
+@keyframes slideIn4 {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.intro {
+  animation: 200ms slideIn5 ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 4500ms;
+  transform: translateX(-80px);
+  opacity: 0;
+}
+
+@keyframes slideIn5 {
+  0% {
+    opacity: 0;
+    z-index: -1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.twitterHeader {
+  animation: 300ms slideInTwitter ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3100ms;
+  transform: translateY(-80px);
+  opacity: 0;
+}
+
+@keyframes slideInTwitter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+#form-react {
+  display: block;
+  color: black;
+}
+
+.mainDiv {
+  background-color: #121212;
+}
+.loaderImg {
+  max-width: 45px;
+}
+
+.animateLoadScreen {
+  animation: 400ms loadScreen ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes loadScreen {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+.successMessage {
+  animation: 300ms successMsgIn ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 100ms;
+  transform: translateY(300px);
+  opacity: 0;
+}
+@keyframes successMsgIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.successMessage__Out {
+  animation: 500ms successMsg ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 50ms;
+  transform: translateY(0px);
+  opacity: 1;
+}
+@keyframes successMsg {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+}
+.mainBody {
+  animation: 400ms mainBodyIn ease-in-out;
+  opacity: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes mainBodyIn {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.mainBody__Out {
+  animation: 500ms mainBodyOut ease-in-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes mainBodyOut {
+  0% {
+    transform: scale(4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loadBar {
+  animation: 1000ms loadAnim ease-in-out;
+  animation-fill-mode: forwards;
+  margin-top: 30px;
+  width: 220px;
+  background: rgb(249 112 22);
+  height: 2px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+@keyframes loadAnim {
+  0% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+.star {
+  animation: 300ms starFade ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3700ms;
+  display: inline-block;
+  background-color: rgb(249 115 22);
+  width: 10px;
+  height: 10px;
+  padding: 18px;
+  border: 5px solid white;
+  transform: rotate(45deg);
+  margin-left: -20px;
+  opacity: 0;
+}
+.star2 {
+  animation: 300ms starFade ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3700ms;
+  display: inline-block;
+  background-color: rgb(255, 175, 118);
+  width: 10px;
+  height: 10px;
+  padding: 18px;
+  border: 5px solid white;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+@keyframes starFade {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform: rotate(45deg);
+  }
+}
+
+.circle {
+  right: 0;
+  top: 25vh;
+  background-color: rgb(238, 110, 18);
+  width: 50vw;
+  height: 50vh;
+  padding: 30px;
+  opacity: 20%;
+  z-index: -1;
+  border-radius: 40px 0 0 40px;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
