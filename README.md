@@ -1,1 +1,3 @@
-This is a pre-release version of the Frikax website
+# Frikax Waitlist
+
+Frikax waitlist page
