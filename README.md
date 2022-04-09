@@ -1,3 +1,3 @@
 # Frikax Waitlist
 
-Frikax waitlist page
+This is the deployed version of Frikax's waitlist.

@@ -1,7 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './assets/main.css';
-import Form from './assets/js/waitlist.js';
+import React from "react";
 
+import * as ReactDOMClient from "react-dom/client";
+import App from "./App";
+import "./styles/style.css";
 
-ReactDOM.render(<Form />, document.getElementById('form-react'));
+const root = document.getElementById("root");
+const RenderApp = ReactDOMClient.createRoot(root);
+
+RenderApp.render(<App />);

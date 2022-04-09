@@ -1,22 +1,24 @@
 {
-  "name": "frikax",
+  "name": "waitlist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "body-parser": "^1.19.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.1",
+    "aos": "^2.3.4",
+    "axios": "^0.26.1",
+    "gsap": "^3.10.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.3.1",
     "react-scripts": "5.0.0",
-    "react-spring": "^9.4.2",
-    "tailwindcss": "^3.0.18",
+    "typed.js": "^2.0.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "tailwind": "npx tailwind -i ./src/styles/main.css -o ./src/styles/style.css --watch",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -26,6 +28,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
   },
   "browserslist": {
     "production": [
@@ -38,14 +45,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "Frikax is a web service for techies, by techies",
-  "main": "index.js",
-  "keywords": [],
-  "author": "Ayodeji Osasona",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.15",
-    "gitro": "^1.2.2"
   }
 }
