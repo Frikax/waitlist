@@ -11,7 +11,7 @@ const RightText = ({ children }) => {
   });
   return (
     <div
-      className="bg-neutral-900 border-2 border-dashed border-neutral-400 py-6 px-5 rounded-xl my-8"
+      className="bg-neutral-900 border-[1px] border-neutral-400 py-6 px-5 rounded-xl my-8"
       data-aos="fade-right"
     >
       <p className="text-left text-[13px] text-neutral-400 font-medium">

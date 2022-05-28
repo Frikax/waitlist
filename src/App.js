@@ -13,6 +13,9 @@ import "aos/dist/aos.css";
 import Typed from "typed.js";
 import { FaTwitter } from "react-icons/fa";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
+import Success from "./components/Success";
+import Error from "./components/Error";
 
 function App() {
   //Current year
@@ -25,6 +28,24 @@ function App() {
     Success: false,
     Text: "",
   });
+  const [Modal, setModal] = useState({
+    Error: false,
+    Success: false,
+    Text: "Hello",
+  });
+
+  //Reset Modal State
+  const resetModal = (duration) => {
+    setTimeout(() => {
+      setModal({
+        Error: false,
+        Success: false,
+        Text: "",
+      });
+    }, duration);
+  };
+
+  const CaptchaRef = useRef();
 
   const TypedText = useRef();
   //Initiate AOS and typed.js
@@ -153,7 +174,12 @@ function App() {
   }, [Email]);
 
   //Form handler
-  const FormHandler = () => {
+  const FormHandler = async (e) => {
+    e.preventDefault();
+    //Get captcha token
+    const Token = await CaptchaRef.current.executeAsync();
+    CaptchaRef.current.reset();
+
     //Set the loading state
     setStatus({
       Error: false,
@@ -164,50 +190,48 @@ function App() {
 
     const Body = {
       email: Email,
+      token: Token,
     };
-    const url = "https://frikax-waitlist-api.herokuapp.com/user/add";
+    const url = `${
+      process.env.REACT_APP_API_URL || "http://localhost:4200"
+    }/user/add`;
 
     axios
       .post(url, Body)
       .then((res) => {
         setStatus({
-          Error: false,
+          ...Status,
           Loading: false,
+        });
+        setModal({
+          ...Modal,
           Success: true,
-          Text: "Amazing! You are now on the waitlist! Don't forget to share with your friends 🎉",
+          Text: "Amazing! You are now on the list! Don't forget to share with your friends 🎉",
         });
 
-        setTimeout(() => {
-          setStatus({
-            Error: false,
-            Loading: false,
-            Success: false,
-            Text: "",
-          });
-          setEmail("");
-        }, 8000);
+        resetModal(5000);
       })
       .catch((err) => {
         setStatus({
-          Error: true,
+          ...Status,
           Loading: false,
-          Success: false,
+        });
+        setModal({
+          ...Modal,
+          Error: true,
           Text: err.response.data.message,
         });
-
-        setTimeout(() => {
-          setStatus({
-            Error: false,
-            Loading: false,
-            Success: false,
-            Text: "",
-          });
-        }, 4000);
+        resetModal(4000);
       });
   };
 
   return (
     <>
+      <ReCAPTCHA
+        sitekey={process.env.REACT_APP_SITE_KEY}
+        size="invisible"
+        ref={CaptchaRef}
+      />
       <div className="w-[90%] md:w-[80%] xl:w-4/5 2xl:w-5/6 mx-auto">
         <nav
           className="flex justify-between items-center mx-auto w-[96%] lg:w-full mt-[5vh] lg:mt-10 opacity-0 translate-y-[-10rem]"
@@ -246,41 +270,38 @@ function App() {
               beta when we're live!
             </p>
 
-            <div
-              className="w-full py-2 px-6 bg-neutral-700 text-sm mt-14 lg:mt-10 translate-y-[100vh] rounded-xl lg:rounded-t-xl lg:rounded-b-none"
-              ref={EmailField}
-            >
-              <span className="text-[10px] lg:text-xs text-neutral-300 font-medium">
-                e-Mail address
-              </span>
-              <input
-                type="text"
-                className="w-full pb-2 pt-1 lg:py-2 bg-transparent font-light text-[15px] focus:outline-none placeholder-neutral-500"
-                value={Email}
-                placeholder="enter email address..."
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            {Status.Error ? (
-              <div className="text-left text-red-600 lg:bg-red-600 lg:bg-opacity-20 font-medium text-xs md:text-sm py-2 px-2">
-                {Status.Text}
+            <form onSubmit={FormHandler}>
+              <div
+                className="w-full py-2 px-6 bg-neutral-700 text-sm mt-14 lg:mt-10 translate-y-[100vh] rounded-xl lg:rounded-t-xl lg:rounded-b-none"
+                ref={EmailField}
+              >
+                <span className="text-[10px] lg:text-xs text-neutral-300 font-medium">
+                  e-Mail address
+                </span>
+                <input
+                  type="text"
+                  className="w-full pb-2 pt-1 lg:py-2 bg-transparent font-light text-[15px] focus:outline-none placeholder-neutral-500"
+                  value={Email}
+                  placeholder="enter email address..."
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-            ) : (
-              Status.Success && (
-                <div className="text-left text-green-600 lg:bg-green-600 lg:bg-opacity-10 font-medium text-xs md:text-sm py-3 px-2 lg:px-4">
+              {Status.Error && (
+                <div className="text-left text-red-600 lg:bg-red-600 lg:bg-opacity-10 font-medium text-xs md:text-sm py-2 lg:py-3 px-2 lg:px-3 lg:text-center">
                   {Status.Text}
                 </div>
-              )
-            )}
+              )}
 
-            <button
-              className="w-full bg-primary hover:bg-secondary hover:text-black text-white text-sm font-normal py-4 lg:py-5 mt-6 lg:mt-0 rounded-xl lg:rounded-b-xl lg:rounded-t-none translate-y-[100vh]"
-              ref={RequestButton}
-              disabled={Status.Error || !Email ? true : false}
-              onClick={FormHandler}
-            >
-              Request Access
-            </button>
+              <button
+                type="submit"
+                className="w-full bg-primary hover:bg-secondary hover:text-black text-white text-sm font-normal py-4 lg:py-5 mt-6 lg:mt-0 rounded-xl lg:rounded-b-xl lg:rounded-t-none translate-y-[100vh]"
+                ref={RequestButton}
+                // disabled={Email.length === 0 ? true : false}
+              >
+                Request Access
+              </button>
+            </form>
           </div>
 
           <div className="bg-primary-gray w-full lg:bg-transparent">
@@ -307,7 +328,9 @@ function App() {
             className="w-[70%] mx-auto text-4xl font-semibold"
             data-aos="fade-down"
           >
-            Get ready to <span className="text-primary" ref={TypedText}></span>
+            Get ready to
+            <br />
+            <span className="text-primary inline-block" ref={TypedText}></span>
           </h1>
 
           <div className="mt-[9vh]">
@@ -388,19 +411,16 @@ function App() {
           </div>
         </div>
         <div className="py-[8vh] flex justify-evenly items-center">
-            
-              <img
-                src={Header}
-                alt="header"
-                className="h-6 object-contain mb-3"
-              />
-              <p className="text-[#b0b0b0] text-left text-[14px] tracking-wide font-light">
-              &copy; {Year} Breege Technologies
-            </p>
-          </div>
+          <img src={Header} alt="header" className="h-6 object-contain mb-3" />
+          <p className="text-[#b0b0b0] text-left text-[14px] tracking-wide font-light">
+            &copy; {Year} Breege Technologies
+          </p>
+        </div>
       </div>
 
       {Status.Loading && <Loader />}
+      <Success text={Modal.Text} visible={Modal.Success} />
+      <Error text={Modal.Text} visible={Modal.Error} />
     </>
   );
 }
